@@ -2,7 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import org.json.JSONException;
+import org.json.JSONObject;
 /**
  *
  * @author Sayyida Qurrata A'yunin (2210010331)
@@ -15,7 +29,63 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
     public AplikasiCekCuacaForm() {
         initComponents();
     }
+private String getWeatherData(String kotaNama) {
+    String apiKey = "589e7fc60fe84ccb9be01d4c426455e1"; // API Key Saya
+    String apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + kotaNama + "&appid=" + apiKey + "&units=metric";
+    StringBuilder response = new StringBuilder();
+    
+    try {
+        URL url = new URL(apiUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
 
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+        }
+        conn.disconnect();
+    } catch (IOException e) {
+    }
+    
+    return response.toString();
+}
+
+private void displayWeather(String kotaNama) {
+    try {
+        String jsonData = getWeatherData(kotaNama);
+        if (jsonData != null && !jsonData.isEmpty()) {
+            JSONObject jsonObject = new JSONObject(jsonData);
+            
+            // Extract weather information
+            String city = jsonObject.getString("name");
+            double temp = jsonObject.getJSONObject("main").getDouble("temp");
+            int humidity = jsonObject.getJSONObject("main").getInt("humidity"); // Extract humidity
+            String description = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
+            String iconCode = jsonObject.getJSONArray("weather").getJSONObject(0).getString("icon");
+            double windSpeed = jsonObject.getJSONObject("wind").getDouble("speed");
+            
+            // Update GUI components
+            lblCuaca.setText(city + ": " + description);
+            lblSuhu.setText("Temperature: " + temp + "°C");
+            lblAngin.setText("Wind Speed: " + windSpeed + " m/s");
+            lblKelembapan.setText("Kelembapan: " + humidity + " %");
+            
+            // Fetch and set the weather icon
+            String iconUrl = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+            URL url = new URL(iconUrl);
+            ImageIcon icon = new ImageIcon(url);
+            icoCuaca.setIcon(new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+        } else {
+            lblCuaca.setText("Error fetching data");
+            lblSuhu.setText("");
+            lblAngin.setText("");
+            icoCuaca.setIcon(null);
+        }
+    } catch (MalformedURLException | JSONException e) {
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +98,7 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtKota = new javax.swing.JTextField();
         cbbKota = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -43,9 +113,10 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
         lblAngin = new javax.swing.JLabel();
         icoAngin = new javax.swing.JLabel();
         lblKota = new javax.swing.JLabel();
-        Hapus1 = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
         btnBersih1 = new javax.swing.JButton();
         lblKota1 = new javax.swing.JLabel();
+        lblKelembapan = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,7 +143,7 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtKota.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
         cbbKota.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         cbbKota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Pilih kota)", "Martapura", "Banjarmasin" }));
@@ -90,9 +161,19 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
 
         btnCekCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnCekCuaca.setText("Cek Cuaca");
+        btnCekCuaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCekCuacaActionPerformed(evt);
+            }
+        });
 
         btnSimpan.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnSimpan.setText("Simpan Data");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel4.setText("Pilih kota yang tersimpan");
@@ -102,6 +183,11 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
 
         btnAddFave.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnAddFave.setText("Simpan Ke Favorit");
+        btnAddFave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddFaveActionPerformed(evt);
+            }
+        });
 
         lblCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         lblCuaca.setText("Desc. Weather");
@@ -113,7 +199,7 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
         lblSuhu.setText("Suhu Desc.");
 
         lblAngin.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        lblAngin.setText("Kecepatan Angin dan kelembapan");
+        lblAngin.setText("Kecepatan Angin");
 
         icoAngin.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         icoAngin.setText("Angin Icon");
@@ -121,14 +207,22 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
         lblKota.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         lblKota.setText("Nama Kota Muncul Disini!");
 
-        Hapus1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        Hapus1.setText("Hapus");
+        btnHapus.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btnHapus.setText("Hapus");
 
         btnBersih1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnBersih1.setText("Bersihkan");
+        btnBersih1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBersih1ActionPerformed(evt);
+            }
+        });
 
         lblKota1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         lblKota1.setText("Pilih atau Cari Nama Kota");
+
+        lblKelembapan.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        lblKelembapan.setText("Kelembapan");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,47 +231,53 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(icoCuaca)
-                    .addComponent(lblCuaca)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(icoSuhu)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSuhu))
-                    .addComponent(lblAngin)
-                    .addComponent(icoAngin)
-                    .addComponent(lblKota))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(icoCuaca)
+                            .addComponent(lblCuaca)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(icoSuhu)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblSuhu))
+                            .addComponent(icoAngin)
+                            .addComponent(lblKota))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnCekCuaca)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBersih1)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAddFave)
-                                .addContainerGap(54, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1)
-                                            .addComponent(cbbKota, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnCekCuaca)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnBersih1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnAddFave)
+                                        .addContainerGap(60, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(4, 4, 4)
-                                                .addComponent(jLabel4))))
-                                    .addComponent(lblKota1))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Hapus1)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnSimpan)
-                        .addGap(141, 141, 141))))
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtKota)
+                                                    .addComponent(cbbKota, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel3)
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addGap(4, 4, 4)
+                                                        .addComponent(jLabel4))))
+                                            .addComponent(lblKota1))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnHapus)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnSimpan)
+                                .addGap(141, 141, 141))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblAngin)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblKelembapan)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,9 +289,8 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblKota)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)))
+                    .addComponent(txtKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -205,7 +304,7 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
                             .addComponent(btnBersih1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Hapus1)
+                            .addComponent(btnHapus)
                             .addComponent(btnSimpan)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(icoCuaca)
@@ -216,10 +315,12 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
                             .addComponent(lblSuhu)
                             .addComponent(icoSuhu))
                         .addGap(18, 18, 18)
-                        .addComponent(icoAngin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblAngin)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addComponent(icoAngin)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAngin)
+                    .addComponent(lblKelembapan))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
@@ -231,6 +332,66 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
     private void cbbKotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKotaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbKotaActionPerformed
+
+    private void btnCekCuacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekCuacaActionPerformed
+          // Get selected city or manual input
+    String pilihKota = cbbKota.getSelectedItem().toString();
+    String inputKota = txtKota.getText().trim();
+    String kotaNama = !inputKota.isEmpty() ? inputKota : pilihKota;
+    
+    // Display weather for the city
+    displayWeather(kotaNama);
+    }//GEN-LAST:event_btnCekCuacaActionPerformed
+
+    private void btnBersih1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBersih1ActionPerformed
+    txtKota.setText("");
+    lblCuaca.setText("");
+    lblSuhu.setText("");
+    lblAngin.setText("");
+    lblKelembapan.setText("");
+    icoCuaca.setIcon(null);
+    }//GEN-LAST:event_btnBersih1ActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        // File chooser to select save location
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Simpan Data Cuaca");
+    
+    int userSelection = fileChooser.showSaveDialog(this);
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File fileToSave = fileChooser.getSelectedFile();
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileToSave))) {
+            // Writing data in CSV format
+            writer.println("Keterangan Cuaca, Temperatur, Kelembapan, Kecepatan Angin");
+            writer.printf("%s, %s, %s, %s\n", 
+                lblCuaca.getText(),
+                lblSuhu.getText(),
+                lblAngin.getText(),
+                lblKelembapan.getText()
+            );
+            JOptionPane.showMessageDialog(this, "Data cuaca berhasil disimpan!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage(), "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnAddFaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFaveActionPerformed
+        String kotaNama = txtKota.getText().trim();
+    
+    // Check if city name is empty
+    if (kotaNama.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nama kota tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Add city to combo box
+    cbbKota.addItem(kotaNama);
+    JOptionPane.showMessageDialog(this, "Kota berhasil ditambahkan ke favorit!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+    
+    // Clear the text field
+    txtKota.setText("");
+    }//GEN-LAST:event_btnAddFaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,10 +429,10 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Hapus1;
     private javax.swing.JButton btnAddFave;
     private javax.swing.JButton btnBersih1;
     private javax.swing.JButton btnCekCuaca;
+    private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox<String> cbbKota;
     private javax.swing.JLabel icoAngin;
@@ -284,11 +445,12 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblAngin;
     private javax.swing.JLabel lblCuaca;
+    private javax.swing.JLabel lblKelembapan;
     private javax.swing.JLabel lblKota;
     private javax.swing.JLabel lblKota1;
     private javax.swing.JLabel lblSuhu;
+    private javax.swing.JTextField txtKota;
     // End of variables declaration//GEN-END:variables
 }
