@@ -5,7 +5,7 @@
 
 /**
  *
- * @author Asus
+ * @author Sayyida Qurrata A'yunin (2210010331)
  */
 public class AplikasiCekCuacaForm extends javax.swing.JFrame {
 
@@ -32,16 +32,20 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
         cbbKota = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        CekCuaca = new javax.swing.JButton();
-        Simpan = new javax.swing.JButton();
+        btnCekCuaca = new javax.swing.JButton();
+        btnSimpan = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        Hapus = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        icoCuaca = new javax.swing.JLabel();
+        btnAddFave = new javax.swing.JButton();
+        lblCuaca = new javax.swing.JLabel();
+        icoSuhu = new javax.swing.JLabel();
+        lblSuhu = new javax.swing.JLabel();
+        lblAngin = new javax.swing.JLabel();
+        icoAngin = new javax.swing.JLabel();
+        lblKota = new javax.swing.JLabel();
+        Hapus1 = new javax.swing.JButton();
+        btnBersih1 = new javax.swing.JButton();
+        lblKota1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,16 +58,16 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(211, Short.MAX_VALUE)
+                .addContainerGap(212, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(207, 207, 207))
+                .addGap(219, 219, 219))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -71,7 +75,7 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
         cbbKota.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        cbbKota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbKota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Pilih kota)", "Martapura", "Banjarmasin" }));
         cbbKota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbKotaActionPerformed(evt);
@@ -84,104 +88,138 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel3.setText("Ketik Kota yang ingin di cek");
 
-        CekCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        CekCuaca.setText("Cek Cuaca");
+        btnCekCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btnCekCuaca.setText("Cek Cuaca");
 
-        Simpan.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        Simpan.setText("Simpan");
+        btnSimpan.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btnSimpan.setText("Simpan Data");
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel4.setText("Pilih kota yang tersimpan");
 
-        jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel5.setText("Gambar Cuaca");
+        icoCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        icoCuaca.setText("Gambar Cuaca");
 
-        Hapus.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        Hapus.setText("Hapus");
+        btnAddFave.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btnAddFave.setText("Simpan Ke Favorit");
 
-        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel6.setText("Desc. Weather");
+        lblCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        lblCuaca.setText("Desc. Weather");
 
-        jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel7.setText("Suhu Icon");
+        icoSuhu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        icoSuhu.setText("Suhu Icon");
 
-        jLabel8.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel8.setText("Suhu Desc.");
+        lblSuhu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        lblSuhu.setText("Suhu Desc.");
 
-        jLabel9.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel9.setText("Kecepatan Angin dan kelembapan");
+        lblAngin.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        lblAngin.setText("Kecepatan Angin dan kelembapan");
 
-        jLabel10.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel10.setText("Angin Icon");
+        icoAngin.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        icoAngin.setText("Angin Icon");
+
+        lblKota.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        lblKota.setText("Nama Kota Muncul Disini!");
+
+        Hapus1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        Hapus1.setText("Hapus");
+
+        btnBersih1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btnBersih1.setText("Bersihkan");
+
+        lblKota1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        lblKota1.setText("Pilih atau Cari Nama Kota");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addGap(72, 72, 72)
+                    .addComponent(icoCuaca)
+                    .addComponent(lblCuaca)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(icoSuhu)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSuhu))
+                    .addComponent(lblAngin)
+                    .addComponent(icoAngin)
+                    .addComponent(lblKota))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(cbbKota, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(72, 72, 72)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel4))
-                            .addComponent(jLabel3)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(CekCuaca)
-                        .addGap(18, 18, 18)
-                        .addComponent(Simpan)
-                        .addGap(18, 18, 18)
-                        .addComponent(Hapus)))
-                .addGap(0, 35, Short.MAX_VALUE))
+                                .addComponent(btnCekCuaca)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBersih1)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAddFave)
+                                .addContainerGap(54, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextField1)
+                                            .addComponent(cbbKota, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(4, 4, 4)
+                                                .addComponent(jLabel4))))
+                                    .addComponent(lblKota1))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Hapus1)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnSimpan)
+                        .addGap(141, 141, 141))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblKota1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblKota)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbbKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(32, 32, 32)
+                        .addGap(26, 26, 26)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Simpan)
-                            .addComponent(CekCuaca)
-                            .addComponent(Hapus)))
+                            .addComponent(btnCekCuaca)
+                            .addComponent(btnAddFave)
+                            .addComponent(btnBersih1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Hapus1)
+                            .addComponent(btnSimpan)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel2)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel5)
+                        .addComponent(icoCuaca)
                         .addGap(11, 11, 11)
-                        .addComponent(jLabel6)
+                        .addComponent(lblCuaca)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSuhu)
+                            .addComponent(icoSuhu))
+                        .addGap(18, 18, 18)
+                        .addComponent(icoAngin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addContainerGap(82, Short.MAX_VALUE))
+                        .addComponent(lblAngin)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
@@ -230,23 +268,27 @@ public class AplikasiCekCuacaForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CekCuaca;
-    private javax.swing.JButton Hapus;
-    private javax.swing.JButton Simpan;
+    private javax.swing.JButton Hapus1;
+    private javax.swing.JButton btnAddFave;
+    private javax.swing.JButton btnBersih1;
+    private javax.swing.JButton btnCekCuaca;
+    private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox<String> cbbKota;
+    private javax.swing.JLabel icoAngin;
+    private javax.swing.JLabel icoCuaca;
+    private javax.swing.JLabel icoSuhu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblAngin;
+    private javax.swing.JLabel lblCuaca;
+    private javax.swing.JLabel lblKota;
+    private javax.swing.JLabel lblKota1;
+    private javax.swing.JLabel lblSuhu;
     // End of variables declaration//GEN-END:variables
 }
