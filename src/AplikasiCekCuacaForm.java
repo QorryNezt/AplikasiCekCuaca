@@ -95,6 +95,7 @@ private void displayWeather(String kotaNama) {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -102,22 +103,22 @@ private void displayWeather(String kotaNama) {
         jPanel2 = new javax.swing.JPanel();
         txtKota = new javax.swing.JTextField();
         cbbKota = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnCekCuaca = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        icoCuaca = new javax.swing.JLabel();
         btnAddFave = new javax.swing.JButton();
-        lblCuaca = new javax.swing.JLabel();
-        lblSuhu = new javax.swing.JLabel();
-        lblAngin = new javax.swing.JLabel();
-        lblKota = new javax.swing.JLabel();
         btnHapus = new javax.swing.JButton();
         btnBersih1 = new javax.swing.JButton();
         lblKota1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblKota = new javax.swing.JLabel();
+        lblCuaca = new javax.swing.JLabel();
+        lblSuhu = new javax.swing.JLabel();
+        icoCuaca = new javax.swing.JLabel();
+        lblAngin = new javax.swing.JLabel();
         lblKelembapan = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,7 +138,7 @@ private void displayWeather(String kotaNama) {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
+                .addContainerGap(191, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(125, 125, 125)
                 .addComponent(btnKeluar)
@@ -153,7 +154,7 @@ private void displayWeather(String kotaNama) {
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
 
         txtKota.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
@@ -164,9 +165,6 @@ private void displayWeather(String kotaNama) {
                 cbbKotaActionPerformed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel2.setText("Kondisi Cuaca Sekarang");
 
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel3.setText("Ketik Kota yang ingin di cek");
@@ -190,8 +188,6 @@ private void displayWeather(String kotaNama) {
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel4.setText("Pilih kota yang tersimpan");
 
-        icoCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-
         btnAddFave.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnAddFave.setText("Simpan Ke Favorit");
         btnAddFave.addActionListener(new java.awt.event.ActionListener() {
@@ -200,16 +196,13 @@ private void displayWeather(String kotaNama) {
             }
         });
 
-        lblCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-
-        lblSuhu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-
-        lblAngin.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-
-        lblKota.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-
         btnHapus.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
         btnBersih1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnBersih1.setText("Bersihkan");
@@ -222,27 +215,15 @@ private void displayWeather(String kotaNama) {
         lblKota1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         lblKota1.setText("Pilih atau Cari Nama Kota");
 
-        lblKelembapan.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(icoCuaca)
-                    .addComponent(lblCuaca)
-                    .addComponent(lblKota)
-                    .addComponent(lblSuhu)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblAngin)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblKelembapan)))
+                .addGap(76, 76, 76)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
+                        .addGap(34, 34, 34)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnCekCuaca)
@@ -250,7 +231,7 @@ private void displayWeather(String kotaNama) {
                                 .addComponent(btnBersih1)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAddFave)
-                                .addContainerGap(124, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -276,44 +257,88 @@ private void displayWeather(String kotaNama) {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblKota1))
+                .addComponent(lblKota1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblKota)
                     .addComponent(txtKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbbKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCekCuaca)
+                    .addComponent(btnAddFave)
+                    .addComponent(btnBersih1))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbbKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCekCuaca)
-                            .addComponent(btnAddFave)
-                            .addComponent(btnBersih1))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnHapus)
-                            .addComponent(btnSimpan)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(icoCuaca)
-                        .addGap(11, 11, 11)
-                        .addComponent(lblCuaca)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSuhu)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblAngin)
-                            .addComponent(lblKelembapan))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHapus)
+                    .addComponent(btnSimpan))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
-        getContentPane().add(jSeparator1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel2.setText("Kondisi Cuaca Sekarang");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        jPanel3.add(jLabel2, gridBagConstraints);
+
+        lblKota.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 16, 5, 15);
+        jPanel3.add(lblKota, gridBagConstraints);
+
+        lblCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 16, 5, 15);
+        jPanel3.add(lblCuaca, gridBagConstraints);
+
+        lblSuhu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 16, 5, 15);
+        jPanel3.add(lblSuhu, gridBagConstraints);
+
+        icoCuaca.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 16, 5, 15);
+        jPanel3.add(icoCuaca, gridBagConstraints);
+
+        lblAngin.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 16, 5, 15);
+        jPanel3.add(lblAngin, gridBagConstraints);
+
+        lblKelembapan.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 16, 5, 15);
+        jPanel3.add(lblKelembapan, gridBagConstraints);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.WEST);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -368,20 +393,26 @@ private void displayWeather(String kotaNama) {
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnAddFaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFaveActionPerformed
-        String kotaNama = txtKota.getText().trim();
+       String cityName = txtKota.getText().trim();
+    boolean exists = false;
     
-    // Check if city name is empty
-    if (kotaNama.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Nama kota tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
-        return;
+    // Check if the city already exists in the combo box
+    for (int i = 0; i < cbbKota.getItemCount(); i++) {
+        if (cbbKota.getItemAt(i).equalsIgnoreCase(cityName)) {
+            exists = true;
+            break;
+        }
     }
 
-    // Add city to combo box
-    cbbKota.addItem(kotaNama);
-    JOptionPane.showMessageDialog(this, "Kota berhasil ditambahkan ke favorit!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-    
-    // Clear the text field
-    txtKota.setText("");
+    if (cityName.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nama Kota tidak boleh kosong!", "Warning", JOptionPane.WARNING_MESSAGE);
+    } else if (exists) {
+        JOptionPane.showMessageDialog(this, "Kota '" + cityName + "' sudah ada di dalam kota favorit!", "Warning", JOptionPane.WARNING_MESSAGE);
+    } else {
+        cbbKota.addItem(cityName);
+        JOptionPane.showMessageDialog(this, "Kota '" + cityName + "' berhasil ditambahkan ke favorit.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        txtKota.setText("");
+    }
     }//GEN-LAST:event_btnAddFaveActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
@@ -392,6 +423,16 @@ private void displayWeather(String kotaNama) {
             System.exit(0);
     }
     }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        String selectedCity = (String) cbbKota.getSelectedItem();
+    if (selectedCity.equals("(Pilih kota)")) {
+        JOptionPane.showMessageDialog(this, "Tidak boleh menghapus '(Pilih Kota)'!", "Warning", JOptionPane.WARNING_MESSAGE);
+    } else {
+        cbbKota.removeItem(selectedCity);
+        JOptionPane.showMessageDialog(this, "Kota '" + selectedCity + "' telah di hapus dari favorit.", "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+    }//GEN-LAST:event_btnHapusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,7 +484,7 @@ private void displayWeather(String kotaNama) {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblAngin;
     private javax.swing.JLabel lblCuaca;
     private javax.swing.JLabel lblKelembapan;
